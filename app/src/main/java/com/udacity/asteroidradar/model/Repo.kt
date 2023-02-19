@@ -25,7 +25,9 @@ class Repo (private val dataBase: AsteroidDataBase){
      val asteroidDataList:LiveData<List<Asteroid>>
      get() =dataBase.asteroidDao.getAllAsteroids()
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private val now: String = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE)
+    @RequiresApi(Build.VERSION_CODES.O)
     private val endTime: String = LocalDateTime.now().plusDays(7).format(DateTimeFormatter.ISO_DATE)
 
     /**get the list for today*/
@@ -54,6 +56,7 @@ class Repo (private val dataBase: AsteroidDataBase){
      * function is now safe to call from any thread including the Main thread.
      */
 
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getAsteroidList(){
         withContext(Dispatchers.IO){
            try {
