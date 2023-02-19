@@ -42,13 +42,16 @@ class AsteroidApplication : Application() {
      * and set the constrains*/
 
     @RequiresApi(Build.VERSION_CODES.M)
-    @SuppressLint("IdleBatteryChargingConstraints")
+
     private fun setupRecurringWork() {
          val constraints =Constraints.Builder()
              .setRequiresBatteryNotLow(true)
              .setRequiresCharging(true)
-             .setRequiredNetworkType(NetworkType.UNMETERED)
-             .setRequiresDeviceIdle(true)
+             .setRequiredNetworkType(NetworkType.UNMETERED).apply {
+                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                     setRequiresDeviceIdle(true)
+                 }
+             }
              .build()
         val repeatingRequest = PeriodicWorkRequestBuilder<WorkerManager>(
             1,TimeUnit.DAYS)
