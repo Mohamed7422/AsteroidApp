@@ -36,6 +36,11 @@ class AsteroidApplication : Application() {
     }
 
 
+
+    /**
+     * scheduling the tasks
+     * and set the constrains*/
+
     @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("IdleBatteryChargingConstraints")
     private fun setupRecurringWork() {
