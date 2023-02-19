@@ -1,7 +1,9 @@
 package com.udacity.asteroidradar.main
 
+import android.os.Build
 import android.os.Bundle
 import android.view.*
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -20,6 +22,7 @@ class MainFragment : Fragment() {
     private val dataBase by lazy {AsteroidDataBase.getDataBase(requireContext())}
     private val Repository by lazy {Repo(dataBase)}
     private val mainViewModel: MainViewModel by viewModels {MainViewModelFactory(Repository)}
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val binding = FragmentMainBinding.inflate(inflater)
@@ -43,10 +46,6 @@ class MainFragment : Fragment() {
         binding.viewModel = mainViewModel
         binding.asteroidRecycler.adapter = adapter
 
-        //set data to rec
-        mainViewModel.asteroidList.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
-        })
 
 
 
@@ -61,6 +60,7 @@ class MainFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.show_saved_menu -> mainViewModel.onListItemSelected(MenuSelectionEnum.SAVE)

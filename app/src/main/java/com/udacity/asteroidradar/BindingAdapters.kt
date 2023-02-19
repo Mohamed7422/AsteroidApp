@@ -12,10 +12,14 @@ import com.udacity.asteroidradar.main.MainAdapter
 import com.udacity.asteroidradar.database.Asteroid
 
 
+
+
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
-    val adapter = recyclerView.adapter as MainAdapter
-    adapter.submitList(data)
+fun RecyclerView.bindRecyclerView(data: List<Asteroid>?) {
+    if (!data.isNullOrEmpty()){
+        val adapter = this.adapter as MainAdapter
+        adapter.submitList(data)
+    }
 }
 
 @BindingAdapter("ImageConvert")
