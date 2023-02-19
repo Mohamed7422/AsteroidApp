@@ -2,6 +2,8 @@ package com.udacity.asteroidradar.main
 
 import android.app.Application
 import android.graphics.Picture
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.*
 import androidx.lifecycle.ViewModelProvider.Factory
 import com.udacity.asteroidradar.Network.ASTEROIDAPI
@@ -13,12 +15,15 @@ import com.udacity.asteroidradar.database.Asteroid
 import com.udacity.asteroidradar.model.Repo
 import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.O)
 class MainViewModel (private val repo: Repo)
                      : ViewModel() {
 
 
    private val savedAsteroidList  = repo.asteroidDataList
+   @RequiresApi(Build.VERSION_CODES.O)
    private val todayAsteroidList  = repo.todayAsteroidList
+   @RequiresApi(Build.VERSION_CODES.O)
    private val weekAsteroidList  = repo.weekAsteroidList
 
 
@@ -36,9 +41,6 @@ class MainViewModel (private val repo: Repo)
 
 
 
-
-
-
     init {
         getAsteroidData()
     }
@@ -52,6 +54,7 @@ class MainViewModel (private val repo: Repo)
         _objectnavigation.value = null
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun getAsteroidData() {
      /**
       * on co-routine scope to be in the background thread
@@ -67,6 +70,7 @@ class MainViewModel (private val repo: Repo)
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun onListItemSelected(enum: MainFragment.MenuSelectionEnum){
         clearDataFromSource()
         when(enum){
